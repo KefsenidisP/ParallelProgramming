@@ -1,0 +1,1 @@
+So the java code that was given did not work correctly. This can be seen because the messages that were printed were not in the order that they should, as they are with the solutions. This of course happpened beecause there might have been some fast threads, that managed to enter again the barrier, before the other threads managed to do this
