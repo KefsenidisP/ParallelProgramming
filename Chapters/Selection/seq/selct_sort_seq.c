@@ -114,7 +114,7 @@ int SequentialSelect(int *S, int num, int k)
     if (num <= Q) return SortLessThanQ(S, num, k);
     
     int cNum = num / Q + 1; // This is the new size of the array, when calling again SequentialSelect
-    int * Medians = new int[cNum];
+    int * Medians = (int *) calloc(cNum, sizeof(int));
     int i = 0;
     
     // Cut the array in sub arrays of size Q each and get their medians
@@ -142,7 +142,7 @@ int SequentialSelect(int *S, int num, int k)
     int leg[3] = {0,0,0};
     
     // Marking array used later by the ArrayPack function, to create the sub array of medians
-    int *markS = new int[num];
+    int *markS = (int *) calloc(num, sizeof(int));
     
     CountAndMark(S, markS, num, M, leg);
 
@@ -150,14 +150,14 @@ int SequentialSelect(int *S, int num, int k)
     // leg[i] and k
     if (leg[0] >= k)
     {
-        int *sPack = new int[leg[0]]; // An array of medians
+        int *sPack = (int *) calloc(leg[0], sizeof(int)); // An array of medians
         ArrayPack(S, sPack, num, markS, 0);
         return SequentialSelect(sPack, leg[0], k);
     }
     else if ((leg[0] + leg[1]) >= k) return M;
     else 
     {
-        int *sPack = new int[leg[2]]; // An array of medians
+        int *sPack = (int *) calloc(leg[2], sizeof(int)); // An array of medians
         ArrayPack(S, sPack, num, markS, 2);
         return SequentialSelect(sPack, leg[2], k-(leg[0]+leg[1]));
     }
@@ -194,7 +194,7 @@ int main(int argc, char * argv[])
 
     double time_elapsed = ((double) time_clock) / CLOCKS_PER_SEC;
 
-    printf("The kth element if the array was sorted would be: %d\n", kth_el);
+    // printf("The kth element if the array was sorted would be: %d\n", kth_el);
     printf("Time elapsed: %f\n", time_elapsed);
 
     return 0;
