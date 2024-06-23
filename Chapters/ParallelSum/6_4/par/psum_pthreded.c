@@ -76,31 +76,7 @@ int main(int argc, char* argv[])
 
     double time_taken_par = ((double) time_clock) / CLOCKS_PER_SEC;
     
-    printf("The sum of array elements is %d\n", sum);
-    printf("Time taken for parallel algorithm: %f\n", time_taken_par);
-    
-
-    // Single process testing
-    int procs = th_num; // Just keep the previous value here
-    th_num = 1;
-    tHandles = (pthread_t *) malloc(th_num * sizeof(pthread_t));
-
-    time_clock = clock();
-    pthread_create(&tHandles[0], NULL, Summation, &id[0]);
-    pthread_join(tHandles[0], NULL);
-    sum = gSum[0];
-    time_clock = clock() - time_clock;
-    double time_taken_single = ((double) time_clock) / CLOCKS_PER_SEC;
-
-    printf("The sum of array elements is %d\n", sum);
-    printf("Time taken for single process: %f\n", time_taken_single);
-
-    double speedup = time_taken_single / time_taken_par;
-    double efficiency = (time_taken_single / procs) / time_taken_par;
-
-    printf("\n-----RESULTS-----\n");
-    printf("The speedup is: %f\n", speedup);
-    printf("Efficiency is: %f\n", efficiency);
+    printf("Time elapsed: %f\n", time_taken_par);
 
     return 0;
 }

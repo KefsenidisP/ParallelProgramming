@@ -51,30 +51,7 @@ int main(int argc, char* argv[])
 
     double time_par = end - start;
 
-    printf("\nThe sum of array elements is %d\n", sum);
-    printf("Time taken for parallel: %f\n", time_par);
-
-    omp_set_num_threads(1);
-    sum = 0;
-
-    start = omp_get_wtime();
-#pragma omp parallel for default(shared) private(i) reduction(+:sum)
-    for (i = 0; i < N; ++i)
-        sum = sum + X[i];
-
-    end = omp_get_wtime();
-
-    double time_single = end - start;
-
-    printf("\nThe sum of array elements is %d\n", sum);
-    printf("Time taken for single process: %f\n", time_single);
-
-    double speedup = time_single / time_par;
-    double effeciency = (time_single / th_num) / time_par;
-
-    printf("\n-----RESULTS-----\n");
-    printf("Speedup: %f\n", speedup);
-    printf("Effeciency: %f\n", effeciency);
+    printf("Time elapsed: %f\n", time_par);
 
     return 0;
 }
